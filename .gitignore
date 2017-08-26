@@ -1,4 +1,5 @@
 # Compiled class file
+/target
 *.class
 
 # Log file
@@ -23,5 +24,4 @@ hs_err_pid*
 
 # intellij
 .idea/*
-
 *.iml
