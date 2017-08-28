@@ -19,6 +19,9 @@ public class SectionPage extends Page {
 
     public ProductPage findAndClickItem(String itemName, int colorIndex) {
         try {
+            while (findElements(By.partialLinkText(itemName)).isEmpty()) {
+                driver.navigate().refresh();
+            }
             findElements(By.partialLinkText(itemName)).get(colorIndex).click();
             return new ProductPage(driver);
         } catch (NoSuchElementException | TimeoutException e) {
