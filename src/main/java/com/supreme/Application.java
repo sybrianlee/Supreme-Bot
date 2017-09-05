@@ -18,9 +18,9 @@ public class Application {
 
     public static void main(String[] args) {
         // item to buy
-        Section section = Section.SHIRTS;
-        String name = "Oxford";
-        int colorIndex = 3;
+        Section section = Section.JACKETS;
+        String name = "Chief Tassel";
+        int colorIndex = 0;
         Size size = Size.MEDIUM;
         SupremeItem supremeItem = new SupremeItem(section, name, colorIndex, size);
 
@@ -32,7 +32,6 @@ public class Application {
         // SupremeItem supremeItem = new SupremeItem(section, name, colorIndex, size);
 
         // set up
-        long start = System.nanoTime();
         log.info("Starting Bot");
         log.info("Item to buy: {}", supremeItem);
         ChromeOptions options = new ChromeOptions();
@@ -43,8 +42,9 @@ public class Application {
         SectionPage sectionPage = new SectionPage(driver, supremeItem.getSection());
 
         // select item
-        log.info("Selecting item {}", supremeItem.getName());
+        log.info("Selecting item keyword: {}", supremeItem.getName());
         ProductPage productPage = sectionPage.findAndClickItem(supremeItem.getName(), supremeItem.getColorIndex());
+        long start = System.nanoTime();
 
         // select size
         if (supremeItem.getSize() != null) {
