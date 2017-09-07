@@ -45,7 +45,7 @@ public class CheckoutPage extends Page {
         JSONObject jsonObject = null;
         try {
             JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("info.json")));
+            Object obj = parser.parse(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(testMode ? "test.json" : "info.json")));
             jsonObject = (JSONObject) obj;
         } catch (IOException | ParseException e) {
             e.printStackTrace();

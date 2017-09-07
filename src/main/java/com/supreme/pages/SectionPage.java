@@ -12,8 +12,8 @@ public class SectionPage extends Page {
 
     private static final Logger log = LoggerFactory.getLogger(SectionPage.class);
 
-    public SectionPage(WebDriver driver, Section section) {
-        super(driver);
+    public SectionPage(WebDriver driver, Section section, boolean testing) {
+        super(driver, testing);
         driver.get(String.format("http://www.supremenewyork.com/shop/all/%s", section.getName()));
     }
 

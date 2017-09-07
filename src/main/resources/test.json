@@ -1,0 +1,12 @@
+{
+  "name": "Rick Morty",
+  "email": "wubdub@gmail.com",
+  "tel": "3829477383",
+  "address": "84511 SW Shoneys Blvd",
+  "address2": "Apt B",
+  "zip": "90210",
+  "number": "5555555555554444",
+  "expMonth": "01",
+  "expYear": "2020",
+  "CVV": "918"
+}

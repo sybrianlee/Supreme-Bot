@@ -17,6 +17,8 @@ public abstract class Page {
 
     private static final Logger log = LoggerFactory.getLogger(Page.class);
 
+    protected static boolean testMode = false;
+
     protected WebDriver driver;
     protected WebDriverWait mWait;
     protected WebDriverWait mWait20;
@@ -25,6 +27,11 @@ public abstract class Page {
         this.driver = driver;
         mWait = new WebDriverWait(driver, 3);
         mWait20 = new WebDriverWait(driver, 20);
+    }
+
+    public Page(WebDriver driver, Boolean testing) {
+        this(driver);
+        testMode = testing;
     }
 
     public WebElement findElement(By by) {

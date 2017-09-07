@@ -17,19 +17,29 @@ public class Application {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
-        // item to buy
+        // testing
+        boolean testing = true;
         Section section = Section.JACKETS;
-        String name = "Chief Tassel";
-        int colorIndex = 0;
+        String name = "Wool Overcoat";
+        int colorIndex = 1;
         Size size = Size.MEDIUM;
         SupremeItem supremeItem = new SupremeItem(section, name, colorIndex, size);
 
+        // item to buy
+//        boolean testing = false;
+//        Section section = Section.JACKETS;
+//        String name = "Wool Overcoat";
+//        int colorIndex = 0;
+//        Size size = Size.LARGE;
+//        SupremeItem supremeItem = new SupremeItem(section, name, colorIndex, size);
+
         // backup
-        // SupremeItem.Section section = SupremeItem.Section.HATS;
-        // String name = "Heart New Era";
-        // int colorIndex = 0;
-        // SupremeItem.Size size = null;
-        // SupremeItem supremeItem = new SupremeItem(section, name, colorIndex, size);
+//        boolean testing = false;
+//        Section section = Section.TSHIRTS;
+//        String name = "Small Box Pique";
+//        int colorIndex2 = 0;
+//        Size size = Size.SMALL;
+//        SupremeItem supremeItem = new SupremeItem(section, name, colorIndex2, size);
 
         // set up
         log.info("Starting Bot");
@@ -39,7 +49,7 @@ public class Application {
         WebDriver driver = new ChromeDriver(options);
 
         // go to store section
-        SectionPage sectionPage = new SectionPage(driver, supremeItem.getSection());
+        SectionPage sectionPage = new SectionPage(driver, supremeItem.getSection(), testing);
 
         // select item
         log.info("Selecting item keyword: {}", supremeItem.getName());
