@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -17,21 +16,14 @@ public abstract class Page {
 
     private static final Logger log = LoggerFactory.getLogger(Page.class);
 
-    protected static boolean testMode = false;
-
-    protected WebDriver driver;
-    protected WebDriverWait mWait;
-    protected WebDriverWait mWait20;
+    protected final WebDriver driver;
+    protected final WebDriverWait mWait;
+    protected final WebDriverWait mWait20;
 
     public Page(WebDriver driver) {
         this.driver = driver;
         mWait = new WebDriverWait(driver, 3);
         mWait20 = new WebDriverWait(driver, 20);
-    }
-
-    public Page(WebDriver driver, Boolean testing) {
-        this(driver);
-        testMode = testing;
     }
 
     public WebElement findElement(By by) {
@@ -52,27 +44,11 @@ public abstract class Page {
         }
     }
 
-    public List<WebElement> findElements(WebElement element, By by) {
-        try {
-            List<WebElement> all = element.findElements(by);
-            List<WebElement> visible = new ArrayList<>();
-            for (WebElement e : all) {
-                if (e.isDisplayed()) {
-                    visible.add(e);
-                }
-            }
-            return visible;
-        } catch (NoSuchElementException | TimeoutException e) {
-            log.error("Could not find elements by {}", by.toString());
-            throw e;
-        }
-    }
-
-    public List<WebElement> findElements(By by) {
+    public List<WebElement> findElementsDOM(By by) {
         try {
             return driver.findElements(by);
         } catch (NoSuchElementException | TimeoutException e) {
-            log.error("Could not find elements by {}", by.toString());
+            log.error("Could not find elements in DOM by {}", by.toString());
             throw e;
         }
     }
@@ -92,5 +68,9 @@ public abstract class Page {
 
     public boolean waitUntilInvisible(By by) {
         return mWait20.until(ExpectedConditions.invisibilityOfElementLocated(by));
+    }
+
+    public void refresh() {
+        driver.navigate().refresh();
     }
 }
