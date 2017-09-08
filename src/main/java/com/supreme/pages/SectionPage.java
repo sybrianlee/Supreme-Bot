@@ -1,9 +1,8 @@
 package com.supreme.pages;
 
+import com.supreme.SupremeItem;
 import com.supreme.SupremeItem.Section;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,24 +11,30 @@ public class SectionPage extends Page {
 
     private static final Logger log = LoggerFactory.getLogger(SectionPage.class);
 
-    public SectionPage(WebDriver driver, Section section, boolean testing) {
-        super(driver, testing);
-        driver.get(String.format("http://www.supremenewyork.com/shop/all/%s", section.getName()));
+    private static final String STORE_URL = "http://www.supremenewyork.com/shop/all/";
+
+    public SectionPage(WebDriver driver, Section section) {
+        super(driver);
+        driver.get(STORE_URL + section.getName());
     }
 
-    public ProductPage findAndClickItem(String itemName, int colorIndex) {
+    public ProductPage findAndClickItem(SupremeItem supremeItem) {
+        String name = supremeItem.getName();
+        int colorIndex = supremeItem.getColorIndex();
+
         try {
-            while (findElements(By.partialLinkText(itemName)).isEmpty()) {
-                driver.navigate().refresh();
+            while (itemNotReleased(name)) {
+                refresh();
             }
-            findElements(By.partialLinkText(itemName)).get(colorIndex).click();
+            findElementsDOM(By.partialLinkText(name)).get(colorIndex).click();
             return new ProductPage(driver);
-        } catch (NoSuchElementException | TimeoutException e) {
-            log.error("Could not find item {}", itemName);
-            throw e;
         } catch (IndexOutOfBoundsException e) {
             log.error("Color index greater than available colors");
             throw e;
         }
+    }
+
+    private boolean itemNotReleased(String name) {
+        return findElementsDOM(By.partialLinkText(name)).isEmpty();
     }
 }

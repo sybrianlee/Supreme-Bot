@@ -17,43 +17,26 @@ public class Application {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
-        // testing
-        boolean testing = true;
+        // item to buy
         Section section = Section.JACKETS;
         String name = "Wool Overcoat";
         int colorIndex = 1;
         Size size = Size.MEDIUM;
         SupremeItem supremeItem = new SupremeItem(section, name, colorIndex, size);
 
-        // item to buy
-//        boolean testing = false;
-//        Section section = Section.JACKETS;
-//        String name = "Wool Overcoat";
-//        int colorIndex = 0;
-//        Size size = Size.LARGE;
-//        SupremeItem supremeItem = new SupremeItem(section, name, colorIndex, size);
-
-        // backup
-//        boolean testing = false;
-//        Section section = Section.TSHIRTS;
-//        String name = "Small Box Pique";
-//        int colorIndex2 = 0;
-//        Size size = Size.SMALL;
-//        SupremeItem supremeItem = new SupremeItem(section, name, colorIndex2, size);
-
         // set up
         log.info("Starting Bot");
-        log.info("Item to buy: {}", supremeItem);
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         WebDriver driver = new ChromeDriver(options);
-
+        
         // go to store section
-        SectionPage sectionPage = new SectionPage(driver, supremeItem.getSection(), testing);
+        log.info("Item to buy: {}", supremeItem);
+        SectionPage sectionPage = new SectionPage(driver, supremeItem.getSection());
 
         // select item
         log.info("Selecting item keyword: {}", supremeItem.getName());
-        ProductPage productPage = sectionPage.findAndClickItem(supremeItem.getName(), supremeItem.getColorIndex());
+        ProductPage productPage = sectionPage.findAndClickItem(supremeItem);
         long start = System.nanoTime();
 
         // select size
@@ -82,8 +65,6 @@ public class Application {
         if (checkoutPage.captchaPresent()) {
             log.info("Waiting for captcha to be solved");
             checkoutPage.waitUntilCaptchaSolved();
-        } else {
-            log.info("No captcha");
         }
 
         // finish
