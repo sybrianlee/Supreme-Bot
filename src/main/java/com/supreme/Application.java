@@ -18,9 +18,9 @@ public class Application {
 
     public static void main(String[] args) {
         // item to buy
-        Section section = Section.JACKETS;
-        String name = "Wool Overcoat";
-        int colorIndex = 1;
+        Section section = Section.SWEATSHIRTS;
+        String name = "Stone Island";
+        int colorIndex = 0;
         Size size = Size.MEDIUM;
         SupremeItem supremeItem = new SupremeItem(section, name, colorIndex, size);
 
@@ -36,7 +36,7 @@ public class Application {
 
         // select item
         log.info("Selecting item keyword: {}", supremeItem.getName());
-        ProductPage productPage = sectionPage.findAndClickItem(supremeItem);
+        ProductPage productPage = sectionPage.findItem(supremeItem);
         long start = System.nanoTime();
 
         // select size

@@ -18,7 +18,7 @@ public class SectionPage extends Page {
         driver.get(STORE_URL + section.getName());
     }
 
-    public ProductPage findAndClickItem(SupremeItem supremeItem) {
+    public ProductPage findItem(SupremeItem supremeItem) {
         String name = supremeItem.getName();
         int colorIndex = supremeItem.getColorIndex();
 
@@ -26,7 +26,7 @@ public class SectionPage extends Page {
             while (itemNotReleased(name)) {
                 refresh();
             }
-            findElementsDOM(By.partialLinkText(name)).get(colorIndex).click();
+            driver.get(findElementsDOM(By.partialLinkText(name)).get(colorIndex).getAttribute("href"));
             return new ProductPage(driver);
         } catch (IndexOutOfBoundsException e) {
             log.error("Color index greater than available colors");
