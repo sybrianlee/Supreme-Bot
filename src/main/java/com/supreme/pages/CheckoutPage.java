@@ -18,9 +18,9 @@ public class CheckoutPage extends Page {
 
     // credit card info field locators
     private static final By sCCNumberLocator = By.xpath("//div[@id='card_details']/div[1]/input");
-    private static final By sCCMonthLocator = By.xpath("//div[@id='card_details']/div[2]/select[1]");
-    private static final By sCCYearLocator = By.xpath("//div[@id='card_details']/div[2]/select[2]");
-    private static final By sCCPinLocator = By.xpath("//div[@id='card_details']/div[3]/input");
+    private static final By sCCMonthLocator = By.xpath("//div[@id='card_details']/div[2]/div[1]/select[1]");
+    private static final By sCCYearLocator = By.xpath("//div[@id='card_details']/div[2]/div[1]/select[2]");
+    private static final By sCCPinLocator = By.xpath("//div[@id='card_details']/div[2]/div[2]/input");
     private static final By sTermsLocator = By.className("terms");
 
     private static final By sProcessPaymentButtonLocator = By.name("commit");

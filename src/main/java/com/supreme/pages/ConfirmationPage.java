@@ -10,13 +10,13 @@ public class ConfirmationPage extends Page {
      * Once processing is completed, you will receive a shipping confirmation with the tracking number.
      */
 
-    private static final By sConfirmationLocator = By.id("confirmation");
+    private static final By sConfirmationTextLocator = By.partialLinkText("Your order has been submitted");
 
     public ConfirmationPage(WebDriver driver) {
         super(driver);
     }
 
     public boolean success() {
-        return isElementPresent(sConfirmationLocator);
+        return isElementPresent(sConfirmationTextLocator);
     }
 }

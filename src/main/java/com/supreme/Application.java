@@ -17,12 +17,20 @@ public class Application {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
-        // item to buy
-        Section section = Section.SWEATSHIRTS;
-        String name = "Stone Island";
-        int colorIndex = 0;
+
+        // test
+        Section section = Section.ACCESSORIES;
+        String name = "Tagless Tees";
+        int colorIndex = 1;
         Size size = Size.MEDIUM;
         SupremeItem supremeItem = new SupremeItem(section, name, colorIndex, size);
+
+        // item to buy
+//        Section section = Section.JACKETS;
+//        String name = "Hooded Logo";
+//        int colorIndex = 1;
+//        Size size = Size.MEDIUM;
+//        SupremeItem supremeItem = new SupremeItem(section, name, colorIndex, size);
 
         // set up
         log.info("Starting Bot");
